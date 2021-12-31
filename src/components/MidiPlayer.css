@@ -1,16 +1,34 @@
 .Track {
-    width : 30rem;
-    height : 30rem;
+    width : 20rem;
+    height : 20rem;
     border-radius: 50%;
     background-color: tomato;
     margin:auto;
+    border: 6px solid;
+    border-color: #D1F2EB;
+}
+
+.Album1 {
+    background-image: url('images/Album1.jpeg');
+}
+
+.Album2 {
+    background-image: url('images/Album2.png');
 }
 
 .background{
-    background-image: url('images/midi-back.jpg');
+    background-image: url('images/midi-back2.jpg');
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
     width: 100%;
     height: 100%;
     position: absolute;
+}
+
+.marginTop5{
+    margin-top: 5%;
+}
+
+.marginTop3{
+    margin-top: 3%;
 }
