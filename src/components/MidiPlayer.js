@@ -1,13 +1,17 @@
 import React,{ useState } from 'react';
 import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import { Range } from 'react-range';
+import 'html-midi-player';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MidiPlayer.css';
 
 const Midiplayer = () => {
-    const [aValues, setAValues] = useState([50]);
-    const [bValues, setBValues] = useState([30]);
+    // state 설정
+    const [aValues, setAValues] = useState([50]); // 왼쪽 곡 마디 틱
+    const [bValues, setBValues] = useState([30]); // 오른쪽 곡 마디 틱
+    const [midFile, setMidFile] = useState("https://magenta.github.io/magenta-js/music/demos/melody.mid");
 
     var renderRange = (start, end, initValue, stateCallback) => {
       return(
@@ -93,9 +97,8 @@ const Midiplayer = () => {
                 </Row>
 
                 <Row className="marginTop5 justify-content-center">
-                    <Button md={3} as={Col} variant="secondary">Play Song!</Button>
+                    <Col md={4}><midi-player src={midFile}></midi-player></Col>
                 </Row>
-                
                 
             </Container>
         </div>
