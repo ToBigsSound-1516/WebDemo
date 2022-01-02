@@ -9,12 +9,13 @@
 }
 
 .Album1 {
-    background-image: url('images/Album1.jpeg');
+    background-image: url('images/Album2.png');
 }
 
 .Album2 {
-    background-image: url('images/Album2.png');
+    background-image: url('images/Album1.jpeg');
 }
+
 
 .background{
     background-image: url('images/midi-back2.jpg');
