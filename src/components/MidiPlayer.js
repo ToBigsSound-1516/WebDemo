@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import { Range } from 'react-range';
 import 'html-midi-player';
-
+import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MidiPlayer.css';
@@ -17,10 +17,8 @@ const Midiplayer = () => {
     const [mixSong, setMixSong] = useState("Combination 1"); // 조합 곡 종류 (Select에서 사용)
     const [aArt, setAArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
     const [bArt, setBArt] = useState("Track Album2"); // 왼쪽 곡에 적용될 앨범아트
-    const [midFile, setMidFile] = useState("midiFiles/DontLookBackinAnger.mid");
+    const [midFile, setMidFile] = useState("http://101.101.217.27:1516/dj");
 
-
-    
     // 노래의 범위를 설정하는 함수 stateCallback 파라미터는 함수를 인자로 받아 어떤 스테이트를 변경할지 설정함
     var renderRange = (start, end, initValue, stateCallback) => {
       return(
@@ -60,6 +58,14 @@ const Midiplayer = () => {
         />
       )
     };    
+
+    var handleSubmit = () => {
+      axios.get('http://101.101.217.27:1516/dj').then((Response)=>{
+          console.log(Response.data);
+      }).catch((Error)=>{
+          console.log(Error);
+      })
+    };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
       if (trackNumber == 1) {
@@ -106,7 +112,6 @@ const Midiplayer = () => {
                   </Col>
                 </Row>
 
-                // 앨벙아트 설정
                 <Row className="marginTop5 justify-content-center">
                     <Col md={6} ><div className={aArt} id="Track1"></div></Col>
                     <Col md={6} ><div className={bArt} id="Track2"></div></Col>
