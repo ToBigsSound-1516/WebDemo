@@ -19,6 +19,44 @@ const Midiplayer = () => {
     const [bArt, setBArt] = useState("Track Album2"); // 왼쪽 곡에 적용될 앨범아트
     const [midFile, setMidFile] = useState("http://101.101.217.27:1516/dj");
 
+    const songList = [
+      // 임시 노래 리스트. API 형식으로 변경 예정
+      {
+        'file': "IJustWanttoSayILoveYou.mid",
+        'name': "I Just Want to Say I Love You",
+        'end': 1965
+      },
+      {
+        'file': "IsntSheLovely.mid",
+        'name': "Isn't She Lovely",
+        'end': 733
+      },
+      {
+        'file': "DontLookBackinAnger.mid",
+        'name': "Don't Look Back in Anger",
+        'end': 1556
+      },
+      {
+        'file': "BilleJeans.mid",
+        'name': "Bille Jeans",
+        'end': 2256
+      },
+      {
+        'file': "ThinkOutLoud.mid",
+        'name': "Think Out Loud",
+        'end': 1445
+      },
+      {
+        'file': "IBelieveICanFly.mid",
+        'name': "I Believe I Can Fly",
+        'end': 1280
+      },
+      {
+        'name': "Jazz01.mid",
+        'file': "Jazz01.mid",
+        'end': 1405
+      },
+    ]
     // 노래의 범위를 설정하는 함수 stateCallback 파라미터는 함수를 인자로 받아 어떤 스테이트를 변경할지 설정함
     var renderRange = (start, end, initValue, stateCallback) => {
       return(
@@ -60,16 +98,24 @@ const Midiplayer = () => {
     };    
 
     var handleSubmit = () => {
-      axios.get('http://101.101.217.27:1516/dj').then((Response)=>{
+      var data = {
+        "midi1": aSong,
+        "midi2": bSong,
+        "start1": aValues,
+        "start2": bValues
+      }
+      
+      console.log("Call handleSubmit");
+
+      axios.post('http://101.101.217.27:1516/dj', data).then((Response)=>{
           console.log(Response.data);
-      }).catch((Error)=>{
+      }).catch((Error)=>{;
           console.log(Error);
       })
     };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
       if (trackNumber == 1) {
-        console.log(value);
         setASong(value);
         setAArt(`Track ${value}`);
       }
@@ -78,7 +124,7 @@ const Midiplayer = () => {
         setBArt(`Track ${value}`);
       }
       
-
+      handleSubmit();
     };
 
     return (
@@ -97,8 +143,9 @@ const Midiplayer = () => {
                 <Row className="marginTop3 justify-content-center">
                   <Col className="justify-content-center" md={3}>
                     <Form.Select value={aSong} onChange={(e) => {handleChangeSong(e.target.value, 1)}}>
-                      <option value={"Album1"}>Isn't She Lovely</option>
-                      <option value={"Album2"}>Don't Look Back In Anger</option>
+                      {songList.map((song) => {
+                        return <option value={song.file}>{song.name}</option>
+                      })}
                     </Form.Select>
                   </Col>
 
@@ -106,8 +153,9 @@ const Midiplayer = () => {
 
                   <Col className="justify-content-center" md={3}>
                     <Form.Select value={bSong} onChange={(e) => {handleChangeSong(e.target.value, 2)}}>
-                      <option value={"Album1"}>Isn't She Lovely</option>
-                      <option value={"Album2"}>Don't Look Back In Anger</option>
+                      {songList.map((song) => {
+                          return <option value={song.file}>{song.name}</option>
+                      })}
                     </Form.Select>
                   </Col>
                 </Row>
