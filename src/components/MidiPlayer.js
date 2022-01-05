@@ -9,15 +9,18 @@ import './MidiPlayer.css';
 
 const Midiplayer = () => {
     // state 설정
-    const [aValues, setAValues] = useState([50]); // 왼쪽 곡 마디 틱 (Range에서 사용)
-    const [bValues, setBValues] = useState([30]); // 오른쪽 곡 마디 틱 (Range에서 사용)
+    const [aValues, setAValues] = useState([0]); // 왼쪽 곡 마디 틱 (Range에서 사용)
+    const [bValues, setBValues] = useState([0]); // 오른쪽 곡 마디 틱 (Range에서 사용)
 
-    const [aSong, setASong] = useState("Album1"); // 왼쪽 곡 종류 (Select에서 사용)
-    const [bSong, setBSong] = useState("Album2"); // 오른쪽 곡 종류 (Select에서 사용)
+    const [aSong, setASong] = useState(1); // 왼쪽 곡 종류 (Select에서 사용)
+    const [bSong, setBSong] = useState(0); // 오른쪽 곡 종류 (Select에서 사용)
     const [mixSong, setMixSong] = useState("Combination 1"); // 조합 곡 종류 (Select에서 사용)
     const [aArt, setAArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
     const [bArt, setBArt] = useState("Track Album2"); // 왼쪽 곡에 적용될 앨범아트
     const [midFile, setMidFile] = useState("http://101.101.217.27:1516/dj");
+
+    const [songAEnd, setSongAEnd] = useState(100);
+    const [songBEnd, setSongBEnd] = useState(100);
 
     const songList = [
       // 임시 노래 리스트. API 형식으로 변경 예정
@@ -99,8 +102,8 @@ const Midiplayer = () => {
 
     var handleSubmit = () => {
       var data = {
-        "midi1": aSong,
-        "midi2": bSong,
+        "midi1": songList[aSong].file,
+        "midi2": songList[bSong].file,
         "start1": aValues,
         "start2": bValues
       }
@@ -116,12 +119,14 @@ const Midiplayer = () => {
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
       if (trackNumber == 1) {
-        setASong(value);
-        setAArt(`Track ${value}`);
+        setASong(songList[value].name);
+        setAArt(`Track Album${value}`);
+        setSongAEnd(songList[value].end);
       }
       else{
-        setBSong(value);
-        setBArt(`Track ${value}`);
+        setBSong(songList[value].name);
+        setBArt(`Track Album${value}`);
+        setSongBEnd(songList[value].end);
       }
       
       handleSubmit();
@@ -143,8 +148,8 @@ const Midiplayer = () => {
                 <Row className="marginTop3 justify-content-center">
                   <Col className="justify-content-center" md={3}>
                     <Form.Select value={aSong} onChange={(e) => {handleChangeSong(e.target.value, 1)}}>
-                      {songList.map((song) => {
-                        return <option value={song.file}>{song.name}</option>
+                      {songList.map((song, idx) => {
+                        return <option key={idx} value={idx}>{song.name}</option>
                       })}
                     </Form.Select>
                   </Col>
@@ -153,9 +158,9 @@ const Midiplayer = () => {
 
                   <Col className="justify-content-center" md={3}>
                     <Form.Select value={bSong} onChange={(e) => {handleChangeSong(e.target.value, 2)}}>
-                      {songList.map((song) => {
-                          return <option value={song.file}>{song.name}</option>
-                      })}
+                      {songList.map((song, idx) => {
+                          return <option key={idx} value={idx}>{song.name}</option>
+;                      })}
                     </Form.Select>
                   </Col>
                 </Row>
@@ -168,9 +173,9 @@ const Midiplayer = () => {
 
                 <Row className="marginTop5">
                   <Col md={1}></Col>
-                  <Col md={4}>{renderRange(0,100, aValues, setAValues)}</Col>
+                  <Col md={4}>{renderRange(0,songAEnd, aValues, setAValues)}</Col>
                   <Col md={2}></Col>
-                  <Col md={4}>{renderRange(0,100, bValues, setBValues)}</Col>
+                  <Col md={4}>{renderRange(0,songBEnd, bValues, setBValues)}</Col>
                   <Col md={1}></Col>
                 </Row>
 
