@@ -9,18 +9,18 @@ import './MidiPlayer.css';
 
 const Midiplayer = () => {
     // state 설정
-    const [aValues, setAValues] = useState([0]); // 왼쪽 곡 마디 틱 (Range에서 사용)
-    const [bValues, setBValues] = useState([0]); // 오른쪽 곡 마디 틱 (Range에서 사용)
+    const [aValues, setAValues] = useState([100]); // 왼쪽 곡 마디 틱 (Range에서 사용)
+    const [bValues, setBValues] = useState([200]); // 오른쪽 곡 마디 틱 (Range에서 사용)
 
     const [aSong, setASong] = useState(1); // 왼쪽 곡 종류 (Select에서 사용)
     const [bSong, setBSong] = useState(0); // 오른쪽 곡 종류 (Select에서 사용)
     const [mixSong, setMixSong] = useState("Combination 1"); // 조합 곡 종류 (Select에서 사용)
     const [aArt, setAArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
-    const [bArt, setBArt] = useState("Track Album2"); // 왼쪽 곡에 적용될 앨범아트
+    const [bArt, setBArt] = useState("Track Album0"); // 왼쪽 곡에 적용될 앨범아트
     const [midFile, setMidFile] = useState("http://101.101.217.27:1516/dj");
 
-    const [songAEnd, setSongAEnd] = useState(100);
-    const [songBEnd, setSongBEnd] = useState(100);
+    const [songAEnd, setSongAEnd] = useState(1965);
+    const [songBEnd, setSongBEnd] = useState(733);
 
     const songList = [
       // 임시 노래 리스트. API 형식으로 변경 예정
@@ -100,17 +100,20 @@ const Midiplayer = () => {
       )
     };    
 
+    // 믹싱 파일을 불러오고 세팅합니다.
     var handleSubmit = () => {
       var data = {
         "midi1": songList[aSong].file,
         "midi2": songList[bSong].file,
-        "start1": aValues,
-        "start2": bValues
+        "start1": aValues[0],
+        "start2": bValues[0],
+        "username": "abc"
       }
       
       console.log("Call handleSubmit");
 
       axios.post('http://101.101.217.27:1516/dj', data).then((Response)=>{
+          console.log("Success");
           console.log(Response.data);
       }).catch((Error)=>{;
           console.log(Error);
@@ -160,7 +163,7 @@ const Midiplayer = () => {
                     <Form.Select value={bSong} onChange={(e) => {handleChangeSong(e.target.value, 2)}}>
                       {songList.map((song, idx) => {
                           return <option key={idx} value={idx}>{song.name}</option>
-;                      })}
+                      })}
                     </Form.Select>
                   </Col>
                 </Row>

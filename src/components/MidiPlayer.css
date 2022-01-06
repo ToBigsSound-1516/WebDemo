@@ -9,6 +9,11 @@
     background-size: 100% 100%;
 }
 
+.Album0 {
+    background-image: url('images/Albums/Album0.jpg');
+}
+
+
 .Album1 {
     background-image: url('images/Albums/Album1.jpg');
 }
