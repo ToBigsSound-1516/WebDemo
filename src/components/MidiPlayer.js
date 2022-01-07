@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import { Range } from 'react-range';
 import 'html-midi-player';
@@ -9,53 +9,67 @@ import './MidiPlayer.css';
 
 const Midiplayer = () => {
     // state 설정
-    const [aValues, setAValues] = useState([100]); // 왼쪽 곡 마디 틱 (Range에서 사용)
-    const [bValues, setBValues] = useState([200]); // 오른쪽 곡 마디 틱 (Range에서 사용)
+    const [aValues, setAValues] = useState([50]); // 왼쪽 곡 마디 틱 (Range에서 사용)
+    const [bValues, setBValues] = useState([50]); // 오른쪽 곡 마디 틱 (Range에서 사용)
 
     const [aSong, setASong] = useState(1); // 왼쪽 곡 종류 (Select에서 사용)
     const [bSong, setBSong] = useState(0); // 오른쪽 곡 종류 (Select에서 사용)
     const [mixSong, setMixSong] = useState("Combination 1"); // 조합 곡 종류 (Select에서 사용)
     const [aArt, setAArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
     const [bArt, setBArt] = useState("Track Album0"); // 왼쪽 곡에 적용될 앨범아트
-    const [midFile, setMidFile] = useState("http://101.101.217.27:1516/dj");
+    const [midFile, setMidFile] = useState("");
 
-    const [songAEnd, setSongAEnd] = useState(1965);
-    const [songBEnd, setSongBEnd] = useState(733);
+    const [songAEnd, setSongAEnd] = useState(100);
+    const [songBEnd, setSongBEnd] = useState(100);
 
     const songList = [
       // 임시 노래 리스트. API 형식으로 변경 예정
       {
+        'id': 0,
         'file': "IJustWanttoSayILoveYou.mid",
+        'path': "midiFiles/IJustWanttoSayILoveYou.mid",
         'name': "I Just Want to Say I Love You",
         'end': 1965
       },
       {
+        'id': 1,
         'file': "IsntSheLovely.mid",
+        'path': "midiFiles/IsntSheLovely.mid",
         'name': "Isn't She Lovely",
         'end': 733
       },
       {
+        'id': 2,
         'file': "DontLookBackinAnger.mid",
+        'path': "midiFiles/DontLookBackinAnger.mid",
         'name': "Don't Look Back in Anger",
         'end': 1556
       },
       {
+        'id': 3,
         'file': "BilleJeans.mid",
+        'path': "midiFiles/BilleJeans.mid",
         'name': "Bille Jeans",
         'end': 2256
       },
       {
+        'id': 4,
         'file': "ThinkOutLoud.mid",
+        'path': "midiFiles/ThinkOutLoud.mid",
         'name': "Think Out Loud",
         'end': 1445
       },
       {
+        'id': 5,
         'file': "IBelieveICanFly.mid",
+        'path': "midiFiles/IBelieveICanFly.mid",
         'name': "I Believe I Can Fly",
         'end': 1280
       },
       {
+        'id': 6,
         'name': "Jazz01.mid",
+        'path': "midiFiles/Jazz01.mid",
         'file': "Jazz01.mid",
         'end': 1405
       },
@@ -115,6 +129,8 @@ const Midiplayer = () => {
       axios.post('http://101.101.217.27:1516/dj', data).then((Response)=>{
           console.log("Success");
           console.log(Response.data);
+          setMidFile(Response.data);
+
       }).catch((Error)=>{;
           console.log(Error);
       })
@@ -122,18 +138,27 @@ const Midiplayer = () => {
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
       if (trackNumber == 1) {
-        setASong(songList[value].name);
+        setASong(songList[value].id);
         setAArt(`Track Album${value}`);
         setSongAEnd(songList[value].end);
       }
       else{
-        setBSong(songList[value].name);
+        setBSong(songList[value].id);
         setBArt(`Track Album${value}`);
         setSongBEnd(songList[value].end);
       }
       
-      handleSubmit();
+      // handleSubmit();
     };
+
+    // 초기 렌더링 시 값 설정
+    useEffect(() => {
+      setSongAEnd(songList[1].end);
+      setSongBEnd(songList[0].end);
+      setAValues([500]);
+      setBValues([200]);
+      setMidFile("http://101.101.217.27:1516/dj");
+    }, []);
 
     return (
         <div className="background" >
@@ -180,6 +205,11 @@ const Midiplayer = () => {
                   <Col md={2}></Col>
                   <Col md={4}>{renderRange(0,songBEnd, bValues, setBValues)}</Col>
                   <Col md={1}></Col>
+                </Row>
+                
+                <Row className="marginTop5 justify-content-center">
+                    <Col md={6}><midi-player src={songList[aSong].path}></midi-player></Col>
+                    <Col md={6}><midi-player src={songList[bSong].path}></midi-player></Col>
                 </Row>
 
                 <Row className="marginTop5 justify-content-center">
