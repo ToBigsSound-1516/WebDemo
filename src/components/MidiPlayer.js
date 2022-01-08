@@ -22,6 +22,7 @@ const Midiplayer = () => {
     const [songAEnd, setSongAEnd] = useState(100);
     const [songBEnd, setSongBEnd] = useState(100);
 
+    const [isInference, setIsInference] = useState(false); // 사용자가 inference 버튼을 눌렀는지 파악하기 위한 변수
     const songList = [
       // 임시 노래 리스트. API 형식으로 변경 예정
       {
@@ -68,7 +69,7 @@ const Midiplayer = () => {
       },
       {
         'id': 6,
-        'name': "Jazz01.mid",
+        'name': "nobody knows you when youre down and out",
         'path': "midiFiles/Jazz01.mid",
         'file': "Jazz01.mid",
         'end': 1405
@@ -116,24 +117,9 @@ const Midiplayer = () => {
 
     // 믹싱 파일을 불러오고 세팅합니다.
     var handleSubmit = () => {
-      var data = {
-        "midi1": songList[aSong].file,
-        "midi2": songList[bSong].file,
-        "start1": aValues[0],
-        "start2": bValues[0],
-        "username": "abc"
-      }
-      
       console.log("Call handleSubmit");
 
-      axios.post('http://101.101.217.27:1516/dj', data).then((Response)=>{
-          console.log("Success");
-          console.log(Response.data);
-          setMidFile(Response.data);
-
-      }).catch((Error)=>{;
-          console.log(Error);
-      })
+      setMidFile(`http://101.101.217.27:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
     };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
@@ -147,17 +133,24 @@ const Midiplayer = () => {
         setBArt(`Track Album${value}`);
         setSongBEnd(songList[value].end);
       }
-      
-      // handleSubmit();
+    };
+
+    // 사용자가 inference 요청을 보냈는지 확인하고 설정합니다.
+    var handleInference = () => {
+      // JSX 버튼을 비활성화
+
+      // axios 요청 후 미디 플레이어로 변경
+      handleSubmit();
     };
 
     // 초기 렌더링 시 값 설정
     useEffect(() => {
       setSongAEnd(songList[1].end);
       setSongBEnd(songList[0].end);
-      setAValues([500]);
-      setBValues([200]);
+      setAValues([50]);
+      setBValues([20]);
       setMidFile("http://101.101.217.27:1516/dj");
+      // setMidFile(`http://101.101.217.27:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&name=abc`);
     }, []);
 
     return (
@@ -208,8 +201,8 @@ const Midiplayer = () => {
                 </Row>
                 
                 <Row className="marginTop5 justify-content-center">
-                    <Col md={6}><midi-player src={songList[aSong].path}></midi-player></Col>
-                    <Col md={6}><midi-player src={songList[bSong].path}></midi-player></Col>
+                    <Col md={6}><midi-player currentTime={aValues[0]} src={songList[aSong].path}></midi-player></Col>
+                    <Col md={6}><midi-player currentTime={bValues[0]} src={songList[bSong].path}></midi-player></Col>
                 </Row>
 
                 <Row className="marginTop5 justify-content-center">
