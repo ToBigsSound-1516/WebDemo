@@ -109,20 +109,56 @@ const Midiplayer = () => {
                 border: '3px solid',
                 borderColor: '#D1F2EB'
               }}
-            />
+            >
+               <div
+                style={{
+                  position: 'absolute',
+                  top: '-35px',
+                  color: '#fff',
+                  fontWeight: 'bold', 
+                  fontSize: '14px',
+                  fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
+                  padding: '7px 4px 4px 4px',
+                  borderRadius: '4px',
+                  backgroundColor: '#548BF4'
+                }}
+              >
+                {initValue[0].toFixed(1)}
+              </div>
+            </div>
           )}
         />
       )
     };    
 
-    // 믹싱 파일을 불러오고 세팅합니다.
+    // 초기에 로드될 때 믹싱 파일을 불러오고 세팅합니다.
     var handleSubmit = () => {
       console.log("Call handleSubmit");
-
       setMidFile(`http://101.101.217.27:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
     };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
+      // 변화된 노래끼리의 최적 매시업 포인트 불러오기
+      var data = {
+        midi1: songList[aSong].file,
+        midi2: songList[bSong].file,
+        mode: 'distribution',
+        n_rank: 1,
+      };
+
+      axios.post("http://101.101.217.27:1516/mashup", data).then((response)=>{
+        console.log("mashup point request success");
+        console.log(response.data[0]);
+        setAValues([response.data[0].start1]);
+        setBValues([response.data[0].start2]);
+      })
+      .catch((error) => {
+        console.log("Error on getting mashup point!")
+        console.log(error);
+      })
+      setIsInference(false); // 인퍼런스 모드를 다시 수동으로 
+
+      // 해당 트랙의 앨범 아트 및 목록, 레인지 끝지점 변경
       if (trackNumber == 1) {
         setASong(songList[value].id);
         setAArt(`Track Album${value}`);
@@ -132,25 +168,28 @@ const Midiplayer = () => {
         setBSong(songList[value].id);
         setBArt(`Track Album${value}`);
         setSongBEnd(songList[value].end);
-      }
+      };
+
     };
 
     // 사용자가 inference 요청을 보냈는지 확인하고 설정합니다.
     var handleInference = () => {
-      // JSX 버튼을 비활성화
-
       // axios 요청 후 미디 플레이어로 변경
       handleSubmit();
+      setIsInference(true); // JSX 버튼을 비활성화
+
     };
+
+    
 
     // 초기 렌더링 시 값 설정
     useEffect(() => {
       setSongAEnd(songList[1].end);
       setSongBEnd(songList[0].end);
-      setAValues([50]);
-      setBValues([20]);
+      setAValues([500]);
+      setBValues([200]);
       setMidFile("http://101.101.217.27:1516/dj");
-      // setMidFile(`http://101.101.217.27:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&name=abc`);
+      setIsInference(false);
     }, []);
 
     return (
@@ -201,12 +240,12 @@ const Midiplayer = () => {
                 </Row>
                 
                 <Row className="marginTop5 justify-content-center">
-                    <Col md={6}><midi-player currentTime={aValues[0]} src={songList[aSong].path}></midi-player></Col>
-                    <Col md={6}><midi-player currentTime={bValues[0]} src={songList[bSong].path}></midi-player></Col>
+                    <Col md={6}><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" currentTime={aValues[0]} src={songList[aSong].path}></midi-player></Col>
+                    <Col md={6}><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" currentTime={bValues[0]} src={songList[bSong].path}></midi-player></Col>
                 </Row>
 
                 <Row className="marginTop5 justify-content-center">
-                    <Col md={4}><midi-player src={midFile}></midi-player></Col>
+                    {isInference ? <Col md={4}><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" src={midFile}></midi-player></Col> : <Col md={2}><Button variant="outline-secondary" onClick={handleInference}>연결하기</Button></Col>}
                 </Row>
                 
             </Container>
