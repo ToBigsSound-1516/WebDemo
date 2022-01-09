@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
 
 class HomeDetail extends React.Component{
     render() {
@@ -26,10 +25,7 @@ class HomeDetail extends React.Component{
                                 backgroundImage : "url(https://images.unsplash.com/photo-1569683795645-b62e50fbf103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80)",
                                 backgroundSize : 'cover'
                             }}
-                            // style="
-                            // background-image: url(https://images.unsplash.com/photo-1569683795645-b62e50fbf103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80);
-                            // background-size: cover;
-                            // "
+
                         >
                             <div className="card-body py-7 text-center">
                             <i className="material-icons text-white text-4xl my-3"
@@ -46,10 +42,7 @@ class HomeDetail extends React.Component{
                                 backgroundImage : "url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80)",
                                 backgroundSize : 'cover'
                             }}
-                            // style="
-                            // background-image: url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80);
-                            // background-size: cover;
-                            // "
+
                         >
                             <div className="card-body pt-7 text-center">
                             <h3 className="text-white">

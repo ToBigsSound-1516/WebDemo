@@ -11,7 +11,9 @@ class Home extends React.Component {
             <Fragment>
                 <NavigationBar></NavigationBar>
                 <Header></Header>
+
                 <HomeDetail></HomeDetail>
+                
                 <Footer></Footer>
             </Fragment>
         )
