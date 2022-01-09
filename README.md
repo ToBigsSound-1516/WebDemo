@@ -1,5 +1,7 @@
-# 투빅디제이 웹 데모
-리액트로 만들어진 웹 데모
+# Smootify Web Demo
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## 작성예정
-.. 추후 작성 예정
+## Usage
+```
+yarn start
+```
