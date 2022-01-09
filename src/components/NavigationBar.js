@@ -24,6 +24,7 @@ const NavigationBar = () => {
               <div className="container-fluid px-0">
                 <a
                   className="navbar-brand font-weight-bolder ms-sm-3"
+                  href="../"
                   rel="tooltip"
                   title="Tobig's 1516"
                   data-placement="bottom"
