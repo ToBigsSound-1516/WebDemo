@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react';
-import {Container, Row, Col, Button, Form} from 'react-bootstrap';
+import {Row, Col, Button, Form} from 'react-bootstrap';
 import { Range } from 'react-range';
 import 'html-midi-player';
 import axios from 'axios'
@@ -23,7 +23,7 @@ const Midiplayer = () => {
     const [songBEnd, setSongBEnd] = useState(100);
 
     const [isInference, setIsInference] = useState(false); // 사용자가 inference 버튼을 눌렀는지 파악하기 위한 변수
-    const songList = [
+    const [songList, setSongList] = useState([
       // 임시 노래 리스트. API 형식으로 변경 예정
       {
         'id': 0,
@@ -74,7 +74,7 @@ const Midiplayer = () => {
         'file': "Jazz01.mid",
         'end': 1405
       },
-    ]
+    ]);
     // 노래의 범위를 설정하는 함수 stateCallback 파라미터는 함수를 인자로 받아 어떤 스테이트를 변경할지 설정함
     var renderRange = (start, end, initValue, stateCallback) => {
       return(
@@ -159,7 +159,7 @@ const Midiplayer = () => {
       setIsInference(false); // 인퍼런스 모드를 다시 수동으로 
 
       // 해당 트랙의 앨범 아트 및 목록, 레인지 끝지점 변경
-      if (trackNumber == 1) {
+      if (trackNumber === 1) {
         setASong(songList[value].id);
         setAArt(`Track Album${value}`);
         setSongAEnd(songList[value].end);
@@ -180,7 +180,15 @@ const Midiplayer = () => {
 
     };
 
-    
+    // mixSong 변경시 호출
+    // var handleChangeMixsong = (value) => {
+    //   if(mixSong === "Combination 1"){
+
+    //   }
+    //   else {
+
+    //   }
+    // }
 
     // 초기 렌더링 시 값 설정
     useEffect(() => {
@@ -198,7 +206,7 @@ const Midiplayer = () => {
             <div class="section text-center">
                 <Row className="marginTop3 justify-content-center">
                   <Col md={6}>
-                    <Form.Select size="lg" onChange={(e) => {setMixSong(e.target.value)}}>
+                    <Form.Select size="lg" value={mixSong} onChange={(e) => {setMixSong(e.target.value)}}>
                       <option value={"Combination 1"}>Don't Look Back In Anger + Isn't She Lovely</option>
                       <option value={"Combination 2"}>샘플 곡 조합2</option>
                       <option value={"Combination 3"}>샘플 곡 조합3</option>

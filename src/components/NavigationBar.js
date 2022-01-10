@@ -25,11 +25,10 @@ const NavigationBar = () => {
                 <a
                   className="navbar-brand font-weight-bolder ms-sm-3"
                   href="../"
-                  rel="tooltip"
+                  rel="noreferrer"
                   title="Tobig's 1516"
                   data-placement="bottom"
                   target="_blank"
-                  rel="noreferrer"
                 >
                   Tobig's Sound Conference
                 </a>
