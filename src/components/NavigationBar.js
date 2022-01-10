@@ -29,6 +29,7 @@ const NavigationBar = () => {
                   title="Tobig's 1516"
                   data-placement="bottom"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Tobig's Sound Conference
                 </a>
@@ -38,6 +39,7 @@ const NavigationBar = () => {
                       className="nav-link nav-link-icon me-2"
                       href="https://github.com/ToBigsSound-1516"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       <i className="fa fa-github me-1"></i>
                       <p
