@@ -193,8 +193,9 @@ const Midiplayer = () => {
     }, []);
 
     return (
-        <div className="background" >
-            <Container>
+        <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+            <div class="container">
+            <div class="section text-center">
                 <Row className="marginTop3 justify-content-center">
                   <Col md={6}>
                     <Form.Select size="lg" onChange={(e) => {setMixSong(e.target.value)}}>
@@ -247,8 +248,9 @@ const Midiplayer = () => {
                 <Row className="marginTop5 justify-content-center">
                     {isInference ? <Col md={4}><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" src={midFile}></midi-player></Col> : <Col md={2}><Button variant="outline-secondary" onClick={handleInference}>연결하기</Button></Col>}
                 </Row>
-                
-            </Container>
+
+            </div>
+            </div>
         </div>
     );
 }

@@ -1,9 +1,15 @@
-import Midiplayer from './components/MidiPlayer.js';
+import { Routes, Route } from 'react-router-dom';
+
+import Home from './views/Home.js'
+import Project from './views/Project.js'
 
 function App() {
   return (
-    <div className="App">
-      <Midiplayer></Midiplayer>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/project" element={<Project />}></Route>
+      </Routes>
     </div>
   );
 }
