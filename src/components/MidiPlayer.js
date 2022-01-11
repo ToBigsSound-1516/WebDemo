@@ -85,6 +85,7 @@ const Midiplayer = () => {
 
           values={initValue}
           onChange={(values) => stateCallback(values)}
+          onFinalChange={(values) => setIsInference(false)}
           renderTrack={({ props, children }) => (
             <div
               {...props}
@@ -146,7 +147,7 @@ const Midiplayer = () => {
         n_rank: 1,
       };
 
-      axios.post("/dj", data).then((response)=>{
+      axios.post("/mashup", data).then((response)=>{
         console.log("mashup point request success");
         console.log(response.data[0]);
         setAValues([response.data[0].start1]);
@@ -196,7 +197,7 @@ const Midiplayer = () => {
       setSongBEnd(songList[0].end);
       setAValues([500]);
       setBValues([200]);
-      setMidFile("http://101.101.217.27:1516/dj");
+      setMidFile("/dj");
       setIsInference(false);
     }, []);
 
