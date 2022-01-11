@@ -134,7 +134,7 @@ const Midiplayer = () => {
     // 초기에 로드될 때 믹싱 파일을 불러오고 세팅합니다.
     var handleSubmit = () => {
       console.log("Call handleSubmit");
-      setMidFile(`https://smootify.o-r.kr:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
+      setMidFile(`/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
     };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
@@ -146,7 +146,7 @@ const Midiplayer = () => {
         n_rank: 1,
       };
 
-      axios.post("https://smootify.o-r.kr:1516/dj", data).then((response)=>{
+      axios.post("/dj", data).then((response)=>{
         console.log("mashup point request success");
         console.log(response.data[0]);
         setAValues([response.data[0].start1]);

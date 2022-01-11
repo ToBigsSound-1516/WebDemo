@@ -25,6 +25,7 @@
         "eject": "react-scripts eject"
     },
     "homepage": "https://smootify-tobigs1516.netlify.app",
+    "proxy": "https://smootify.o-r.kr:1516",
     "eslintConfig": {
         "extends": [
             "react-app",
