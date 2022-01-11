@@ -1,9 +1,4 @@
 import React from 'react'
-// import Background from 'https://user-images.githubusercontent.com/63901494/148684236-70f492a8-505e-4c36-a256-44662f96bc82.png';
-// import '../../public/assets/js/core/popper.min.js'
-// import '../../public/assets/js/core/bootstrap.min.js'
-// import '../../public/assets/js/plugins/perfect-scrollbar.min.js'
-// import '../../public/assets/js/plugins/perfect-scrollbar.min.js'
 
 class Header extends React.Component {
   render() {
