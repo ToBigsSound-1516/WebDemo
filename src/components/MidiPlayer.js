@@ -8,6 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './MidiPlayer.css';
 
 const Midiplayer = () => {
+    // cors 회피
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
     // state 설정
     const [aValues, setAValues] = useState([50]); // 왼쪽 곡 마디 틱 (Range에서 사용)
     const [bValues, setBValues] = useState([50]); // 오른쪽 곡 마디 틱 (Range에서 사용)
@@ -135,7 +138,7 @@ const Midiplayer = () => {
     // 초기에 로드될 때 믹싱 파일을 불러오고 세팅합니다.
     var handleSubmit = () => {
       console.log("Call handleSubmit");
-      setMidFile(`/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
+      setMidFile(`https://smootify.o-r.kr:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
     };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
@@ -147,7 +150,7 @@ const Midiplayer = () => {
         n_rank: 1,
       };
 
-      axios.post("/mashup", data).then((response)=>{
+      axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
         console.log("mashup point request success");
         console.log(response.data[0]);
         setAValues([response.data[0].start1]);
@@ -202,9 +205,9 @@ const Midiplayer = () => {
     }, []);
 
     return (
-        <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
-            <div class="container">
-            <div class="section text-center">
+        <div className="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+            <div className="container">
+            <div className="section text-center">
                 <Row className="marginTop3 justify-content-center">
                   <Col md={6}>
                     <Form.Select size="lg" value={mixSong} onChange={(e) => {setMixSong(e.target.value)}}>
