@@ -34,8 +34,8 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
                 {...props}
                 style={{
                     ...props.style,
-                    height: '42px',
-                    width: '42px',
+                    height: '30px',
+                    width: '30px',
                     backgroundColor: '#88305C',
 
                 }}

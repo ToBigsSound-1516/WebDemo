@@ -28,7 +28,6 @@ const NavigationBar = () => {
                   rel="noreferrer"
                   title="Tobig's 1516"
                   data-placement="bottom"
-                  target="_blank"
                 >
                   Tobig's Sound Conference
                 </a>

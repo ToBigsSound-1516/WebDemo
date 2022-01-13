@@ -151,7 +151,7 @@ const Midiplayer = () => {
             <div className="container">
             <div className="section text-center">
                 <Row className="marginTop3">
-                    <p className="timeDescription">Mashup Time은 추천 시간으로 초기 설정됩니다.</p>
+                    {isInference ? <p></p> : <p className="timeDescription">Mashup Time은 추천 시간으로 초기 설정됩니다.</p> }
                 </Row>
 
                 <Row className="justify-content-center">
