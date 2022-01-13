@@ -83,7 +83,7 @@ class HomeDetail extends React.Component{
                         <h5 className="font-weight-bolder mt-3">환승구간 탐색</h5>
                         <p className="pe-5">
                             Mashup Point 탐색 방법으로 DTW와 유사도를 활용하였습니다. 
-                            전통적인 DTW(dynamic time wrapping) 방식으로 최소경로를, 음악의 마디 별 분포의 유사도를 계산하여 두 음악 트랙들이 자연스럽게 이어질 수 있는
+                            전통적인 DTW 방식으로 최소경로를, 음악의 마디 별 분포의 유사도를 계산하여 두 음악 트랙이 자연스럽게 이어질 수 있는
                             구간을 선정하였습니다.
                         </p>
                         </div>
