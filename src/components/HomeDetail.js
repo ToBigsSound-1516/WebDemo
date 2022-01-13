@@ -12,7 +12,6 @@ class HomeDetail extends React.Component{
                         <div
                         className="
                             card
-                            card-rotate
                             card-background
                             card-background-mask-primary
                             shadow-primary
@@ -20,9 +19,9 @@ class HomeDetail extends React.Component{
                         "
                         >
                         <div
-                            className="front front-background"
+                            className="front back-background"
                             style={{
-                                backgroundImage : "url(https://images.unsplash.com/photo-1569683795645-b62e50fbf103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80)",
+                                backgroundImage : "url(https://user-images.githubusercontent.com/63901494/149368701-5510cb78-6d74-4876-accb-a2311e5cc3f2.png)",
                                 backgroundSize : 'cover'
                             }}
 
@@ -32,14 +31,14 @@ class HomeDetail extends React.Component{
                                 >touch_app</i
                             >
                             <h3 className="text-white">
-                                연속적으로 이어지는 음악 <br />
+                                Tobig Tonix<br />
                             </h3>
                             </div>
                         </div>
                         <div
                             className="back back-background"
                             style={{
-                                backgroundImage : "url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80)",
+                                backgroundImage : "url(https://user-images.githubusercontent.com/63901494/148684236-70f492a8-505e-4c36-a256-44662f96bc82.png)",
                                 backgroundSize : 'cover'
                             }}
 
