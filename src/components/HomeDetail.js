@@ -12,7 +12,6 @@ class HomeDetail extends React.Component{
                         <div
                         className="
                             card
-                            card-rotate
                             card-background
                             card-background-mask-primary
                             shadow-primary
@@ -20,9 +19,9 @@ class HomeDetail extends React.Component{
                         "
                         >
                         <div
-                            className="front front-background"
+                            className="front back-background"
                             style={{
-                                backgroundImage : "url(https://images.unsplash.com/photo-1569683795645-b62e50fbf103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80)",
+                                backgroundImage : "url(https://user-images.githubusercontent.com/63901494/149368701-5510cb78-6d74-4876-accb-a2311e5cc3f2.png)",
                                 backgroundSize : 'cover'
                             }}
 
@@ -32,14 +31,14 @@ class HomeDetail extends React.Component{
                                 >touch_app</i
                             >
                             <h3 className="text-white">
-                                연속적으로 이어지는 음악 <br />
+                                Tobig Tonix<br />
                             </h3>
                             </div>
                         </div>
                         <div
                             className="back back-background"
                             style={{
-                                backgroundImage : "url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80)",
+                                backgroundImage : "url(https://user-images.githubusercontent.com/63901494/148684236-70f492a8-505e-4c36-a256-44662f96bc82.png)",
                                 backgroundSize : 'cover'
                             }}
 
@@ -65,7 +64,7 @@ class HomeDetail extends React.Component{
                         <div className="col-md-6">
                         <div className="info">
                             <h5 className="font-weight-bolder mt-3">프로젝트 목적</h5>
-                            <p className="pe-5">진정한 무한 재생 플레이리스트를 만들자! 곡들이 끊김없이 넘어가는 Gapless playback을 목표로 하며, 앞-뒤로 오는 2개의 음악을 자연스럽게 이어주는 연결마디들을 생성합니다.</p>
+                            <p className="pe-5">진정한 무한 재생 플레이리스트를 만들자! 끊김없이 재생되는 Gapless playback을 목표로, 앞-뒤 음악을 자연스럽게 이어주는 연결마디들을 생성합니다.</p>
                         </div>
                         </div>
                         <div className="col-md-6">
@@ -73,7 +72,7 @@ class HomeDetail extends React.Component{
                             <h5 className="font-weight-bolder mt-3">데이터셋</h5>
                             <p className="pe-3">
                             MIDI 형식으로 되어 있는 음악 파일들을 사용하였습니다. 
-                            Pop 음악들로 이루어진 Million Song Dataset에 기반한 Lakh Pianoroll Dataset들을 활용하였으며, 5개의 트랙을 기준으로 학습하였습니다. 
+                            Pop 음악들로 이루어진 Million Song Dataset에 기반한 Lakh Pianoroll Dataset들을 활용하였습니다.
                             </p>
                         </div>
                         </div>
@@ -82,9 +81,8 @@ class HomeDetail extends React.Component{
                         <div className="col-md-6 mt-3">
                         <h5 className="font-weight-bolder mt-3">환승구간 탐색</h5>
                         <p className="pe-5">
-                            Mashup Point 탐색 방법으로 DTW와 유사도를 활용하였습니다. 
                             전통적인 DTW 방식으로 최소경로를, 음악의 마디 별 분포의 유사도를 계산하여 두 음악 트랙이 자연스럽게 이어질 수 있는
-                            구간을 선정하였습니다.
+                            Mashup Point를 선정하였습니다.
                         </p>
                         </div>
                         <div className="col-md-6 mt-3">
