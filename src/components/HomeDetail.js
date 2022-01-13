@@ -216,39 +216,12 @@ class HomeDetail extends React.Component{
                                             <div className="row justify-space-between py-2">
                                                 <div className="col-lg-3">
                                                     <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/149170188-68085159-8dc1-4438-88ce-d0f9fa652be3.jpg" width="200" height="200" alt="profile" />
-                                                    <p></p>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <p className="lead text-dark pt-1 mb-0">시골소녀</p>
-                                                    <p>(14기 장예은)<br></br>각자 한 마디 소감 블라블라</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-12">
-                                    <div
-                                        className="
-                                        position-relative
-                                        border-radius-xl
-                                        overflow-hidden
-                                        shadow-lg
-                                        mb-7
-                                        "
-                                    >
-                                        <div className="container border-bottom">
-                                            <div className="row justify-space-between py-2">
-                                                <div className="col-lg-3">
-                                                    <p></p>
                                                     <img src= "https://user-images.githubusercontent.com/63901494/149170047-04af8468-1dde-4bb8-8079-508cd1d7eae2.png" width="200" height="200" alt="profile" />
                                                     <p></p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <p className="lead text-dark pt-1 mb-0">판다</p>
-                                                    <p>(15기 김태희)<br></br>악기 연주를 넘어 컴퓨터로 음악 생성하기🎵</p>
+                                                    <p>(15기 김태희)<br></br>"악기 연주를 넘어 컴퓨터로 음악 생성하기🎵"</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,12 +243,12 @@ class HomeDetail extends React.Component{
                                             <div className="row justify-space-between py-2">
                                                 <div className="col-lg-3">
                                                     <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/129619988-1a959834-313c-443c-84c2-4fc2db8ef8f6.jpg" width="200" height="200" alt="profile" />
+                                                    <img src= "https://user-images.githubusercontent.com/63901494/149357764-277ed309-6ae1-4447-8272-9f09fce5122c.jpg" width="200" height="200" alt="profile" />
                                                     <p></p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <p className="lead text-dark pt-1 mb-0">푸</p>
-                                                    <p>(15기 권오현)<br></br>음악만이 나라에서 허락하는 유일한 마약..</p>
+                                                    <p>(15기 권오현)<br></br>"음악만이 나라에서 허락하는 유일한 마약.."</p>
                                                 </div>
                                             </div>
                                         </div>
