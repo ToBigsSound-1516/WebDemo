@@ -1,11 +1,11 @@
 import React,{ useState, useEffect } from 'react';
 import {Row, Col, Button, Form} from 'react-bootstrap';
-import { Range } from 'react-range';
 import 'html-midi-player';
 import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MidiPlayer.css';
+import Miditrack from './MidiTrack';
 
 const Midiplayer = () => {
     // cors 회피
@@ -33,109 +33,60 @@ const Midiplayer = () => {
         'file': "IJustWanttoSayILoveYou.mid",
         'path': "midiFiles/IJustWanttoSayILoveYou.mid",
         'name': "I Just Want to Say I Love You",
-        'end': 1965
+        'end': 1965,
+        'duration': 253
       },
       {
         'id': 1,
         'file': "IsntSheLovely.mid",
         'path': "midiFiles/IsntSheLovely.mid",
         'name': "Isn't She Lovely",
-        'end': 733
+        'end': 733,
+        'duration': 92
       },
       {
         'id': 2,
         'file': "DontLookBackinAnger.mid",
         'path': "midiFiles/DontLookBackinAnger.mid",
         'name': "Don't Look Back in Anger",
-        'end': 1556
+        'end': 1556,
+        'duration': 525
       },
       {
         'id': 3,
         'file': "BilleJeans.mid",
         'path': "midiFiles/BilleJeans.mid",
         'name': "Bille Jeans",
-        'end': 2256
+        'end': 2256,
+        'duration': 521
       },
       {
         'id': 4,
         'file': "ThinkOutLoud.mid",
         'path': "midiFiles/ThinkOutLoud.mid",
         'name': "Think Out Loud",
-        'end': 1445
+        'end': 1445,
+        'duration': 182
       },
       {
         'id': 5,
         'file': "IBelieveICanFly.mid",
         'path': "midiFiles/IBelieveICanFly.mid",
         'name': "I Believe I Can Fly",
-        'end': 1280
+        'end': 1280,
+        'duration': 319
       },
       {
         'id': 6,
-        'name': "nobody knows you when youre down and out",
+        'name': "Nobody knows you when you're down and out",
         'path': "midiFiles/Jazz01.mid",
         'file': "Jazz01.mid",
-        'end': 1405
+        'end': 1405,
+        'duration': 222
       },
-    ]);
-    // 노래의 범위를 설정하는 함수 stateCallback 파라미터는 함수를 인자로 받아 어떤 스테이트를 변경할지 설정함
-    var renderRange = (start, end, initValue, stateCallback) => {
-      return(
-        <Range
-          step={1}
-          min={start}
-          max={end}
+    ]); 
 
-          values={initValue}
-          onChange={(values) => stateCallback(values)}
-          onFinalChange={(values) => setIsInference(false)}
-          renderTrack={({ props, children }) => (
-            <div
-              {...props}
-              style={{
-                ...props.style,
-                height: '6px',
-                width: '100%',
-                backgroundColor: '#D1F2EB'
-              }}
-            >
-              {children}
-            </div>
-          )}
-          renderThumb={({ props }) => (
-            <div
-              {...props}
-              style={{
-                ...props.style,
-                height: '42px',
-                width: '42px',
-                backgroundColor: '#1C2833',
-                border: '3px solid',
-                borderColor: '#D1F2EB'
-              }}
-            >
-               <div
-                style={{
-                  position: 'absolute',
-                  top: '-35px',
-                  color: '#fff',
-                  fontWeight: 'bold', 
-                  fontSize: '14px',
-                  fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
-                  padding: '7px 4px 4px 4px',
-                  borderRadius: '4px',
-                  backgroundColor: '#548BF4'
-                }}
-              >
-                {initValue[0].toFixed(1)}
-              </div>
-            </div>
-          )}
-        />
-      )
-    };    
-
-    // 초기에 로드될 때 믹싱 파일을 불러오고 세팅합니다.
+    // 미디파일 인퍼런스를 실시할 때마다 새로운 미디파일을 받아와서 저장합니다.
     var handleSubmit = () => {
       console.log("Call handleSubmit");
       setMidFile(`https://smootify.o-r.kr:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
@@ -150,6 +101,7 @@ const Midiplayer = () => {
         n_rank: 1,
       };
 
+      // 매시업 포인트를 받아와서 설정하는 역할
       axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
         console.log("mashup point request success");
         console.log(response.data[0]);
@@ -184,16 +136,6 @@ const Midiplayer = () => {
 
     };
 
-    // mixSong 변경시 호출
-    // var handleChangeMixsong = (value) => {
-    //   if(mixSong === "Combination 1"){
-
-    //   }
-    //   else {
-
-    //   }
-    // }
-
     // 초기 렌더링 시 값 설정
     useEffect(() => {
       setSongAEnd(songList[1].end);
@@ -208,7 +150,11 @@ const Midiplayer = () => {
         <div className="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
             <div className="container">
             <div className="section text-center">
-                <Row className="marginTop3 justify-content-center">
+                <Row className="marginTop3">
+                    {isInference ? <p></p> : <p className="timeDescription">Mashup Time은 추천 시간으로 초기 설정됩니다.</p> }
+                </Row>
+
+                <Row className="justify-content-center">
                   <Col md={6}>
                     <Form.Select size="lg" value={mixSong} onChange={(e) => {setMixSong(e.target.value)}}>
                       <option value={"Combination 1"}>Don't Look Back In Anger + Isn't She Lovely</option>
@@ -217,44 +163,10 @@ const Midiplayer = () => {
                     </Form.Select>
                   </Col>
                 </Row>
-
-                <Row className="marginTop3 justify-content-center">
-                  <Col className="justify-content-center" md={3}>
-                    <Form.Select value={aSong} onChange={(e) => {handleChangeSong(e.target.value, 1)}}>
-                      {songList.map((song, idx) => {
-                        return <option key={idx} value={idx}>{song.name}</option>
-                      })}
-                    </Form.Select>
-                  </Col>
-
-                  <Col md={3}></Col>
-
-                  <Col className="justify-content-center" md={3}>
-                    <Form.Select value={bSong} onChange={(e) => {handleChangeSong(e.target.value, 2)}}>
-                      {songList.map((song, idx) => {
-                          return <option key={idx} value={idx}>{song.name}</option>
-                      })}
-                    </Form.Select>
-                  </Col>
-                </Row>
-
-                <Row className="marginTop5 justify-content-center">
-                    <Col md={6} ><div className={aArt} id="Track1"></div></Col>
-                    <Col md={6} ><div className={bArt} id="Track2"></div></Col>
-                </Row>
-
-
-                <Row className="marginTop5">
-                  <Col md={1}></Col>
-                  <Col md={4}>{renderRange(0,songAEnd, aValues, setAValues)}</Col>
-                  <Col md={2}></Col>
-                  <Col md={4}>{renderRange(0,songBEnd, bValues, setBValues)}</Col>
-                  <Col md={1}></Col>
-                </Row>
                 
-                <Row className="marginTop5 justify-content-center">
-                    <Col md={6}><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" currentTime={aValues[0]} src={songList[aSong].path}></midi-player></Col>
-                    <Col md={6}><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" currentTime={bValues[0]} src={songList[bSong].path}></midi-player></Col>
+                <Row>
+                  <Col md={6}><Miditrack trackIdx={1} songList={songList} trackArt={aArt} songIdx={aSong} songEnd={songAEnd} trackValue={aValues} setTrackValueFunc={setAValues} setIsInference={setIsInference} changeSong={handleChangeSong} ></Miditrack></Col>
+                  <Col md={6}><Miditrack trackIdx={2} songList={songList} trackArt={bArt} songIdx={bSong} songEnd={songBEnd} trackValue={bValues} setTrackValueFunc={setBValues} setIsInference={setIsInference} changeSong={handleChangeSong}></Miditrack></Col>
                 </Row>
 
                 <Row className="marginTop5 justify-content-center">
