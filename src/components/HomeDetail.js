@@ -65,15 +65,15 @@ class HomeDetail extends React.Component{
                         <div className="col-md-6">
                         <div className="info">
                             <h5 className="font-weight-bolder mt-3">프로젝트 목적</h5>
-                            <p className="pe-5">음악 2개 이어준다 어저구저쩌구</p>
+                            <p className="pe-5">진정한 무한 재생 플레이리스트를 만들자! 곡들이 끊김없이 넘어가는 Gapless playback을 목표로 하며, 앞-뒤로 오는 2개의 음악을 자연스럽게 이어주는 연결마디들을 생성합니다.</p>
                         </div>
                         </div>
                         <div className="col-md-6">
                         <div className="info">
                             <h5 className="font-weight-bolder mt-3">데이터셋</h5>
                             <p className="pe-3">
-                            MIDI 형식으로 되어 있는 POP 음악 파일들을 사용하여 학습 및
-                            인퍼런스를 진행하였습니다.
+                            MIDI 형식으로 되어 있는 음악 파일들을 사용하였습니다. 
+                            Pop 음악들로 이루어진 Million Song Dataset에 기반한 Lakh Pianoroll Dataset들을 활용하였으며, 5개의 트랙을 기준으로 학습하였습니다. 
                             </p>
                         </div>
                         </div>
@@ -82,7 +82,8 @@ class HomeDetail extends React.Component{
                         <div className="col-md-6 mt-3">
                         <h5 className="font-weight-bolder mt-3">환승구간 탐색</h5>
                         <p className="pe-5">
-                            유사도 기반으로 두 음악 트랙들이 자연스럽게 이어질 수 있는
+                            Mashup Point 탐색 방법으로 DTW와 유사도를 활용하였습니다. 
+                            전통적인 DTW 방식으로 최소경로를, 음악의 마디 별 분포의 유사도를 계산하여 두 음악 트랙이 자연스럽게 이어질 수 있는
                             구간을 선정하였습니다.
                         </p>
                         </div>
@@ -90,8 +91,7 @@ class HomeDetail extends React.Component{
                         <div className="info">
                             <h5 className="font-weight-bolder mt-3">연결고리 생성</h5>
                             <p className="pe-3">
-                            GAN을 이용하여 두 음악 트랙이 자연스럽게 이어질 수 있도록
-                            연결지점의 음악을 생성하였습니다.
+                            MuseGAN의 convolution구조를 차용 및 U-Net 구조를 사용하여 두 음악간의 연결고리를 생성하였습니다. 기존의 음악에서 가운데 부분을 마스킹 후 이를 예측하는 방식으로 학습하였습니다. 
                             </p>
                         </div>
                         </div>
@@ -134,12 +134,12 @@ class HomeDetail extends React.Component{
                                             <div className="row justify-space-between py-2">
                                                 <div className="col-lg-3">
                                                     <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/129619988-1a959834-313c-443c-84c2-4fc2db8ef8f6.jpg" width="200" height="200" alt="profile" />
+                                                    <img src= "https://user-images.githubusercontent.com/63901494/149170222-1697abb8-3a84-4545-934c-11070bbf0662.jpg" width="200" height="200" alt="profile" />
                                                     <p></p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <p className="lead text-dark pt-1 mb-0">도라에몽</p>
-                                                    <p>(15기 안민준)<br></br>각자 한 마디 소감 블라블라</p>
+                                                    <p>(15기 안민준)<br></br>"음악과 함께 투빅스를 졸업해서 너무 행복합니다.. 엉엉"</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,12 +161,12 @@ class HomeDetail extends React.Component{
                                             <div className="row justify-space-between py-2">
                                                 <div className="col-lg-3">
                                                     <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/129619988-1a959834-313c-443c-84c2-4fc2db8ef8f6.jpg" width="200" height="200" alt="profile" />
+                                                    <img src= "https://user-images.githubusercontent.com/63901494/149170304-8fa1c15d-0192-4235-9b9b-645232995858.jpg" width="200" height="200" alt="profile" />
                                                     <p></p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <p className="lead text-dark pt-1 mb-0">무민</p>
-                                                    <p>(15기 황보진경)<br></br>각자 한 마디 소감 블라블라</p>
+                                                    <p>(15기 황보진경)<br></br>"스무스~"</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -189,12 +189,12 @@ class HomeDetail extends React.Component{
                                             <div className="row justify-space-between py-2">
                                                 <div className="col-lg-3">
                                                     <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/129619988-1a959834-313c-443c-84c2-4fc2db8ef8f6.jpg" width="200" height="200" alt="profile" />
+                                                    <img src= "https://user-images.githubusercontent.com/63901494/149170139-ab8b1874-5beb-401c-9fc9-b9747261851f.jpg" width="200" height="200" alt="profile" />
                                                     <p></p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <p className="lead text-dark pt-1 mb-0">밥</p>
-                                                    <p>(16기 김윤혜)<br></br>각자 한 마디 소감 블라블라</p>
+                                                    <p>(16기 김윤혜)<br></br>"음~ 악!"</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,39 +216,12 @@ class HomeDetail extends React.Component{
                                             <div className="row justify-space-between py-2">
                                                 <div className="col-lg-3">
                                                     <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/129619988-1a959834-313c-443c-84c2-4fc2db8ef8f6.jpg" width="200" height="200" alt="profile" />
-                                                    <p></p>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <p className="lead text-dark pt-1 mb-0">시골소녀</p>
-                                                    <p>(14기 장예은)<br></br>각자 한 마디 소감 블라블라</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-12">
-                                    <div
-                                        className="
-                                        position-relative
-                                        border-radius-xl
-                                        overflow-hidden
-                                        shadow-lg
-                                        mb-7
-                                        "
-                                    >
-                                        <div className="container border-bottom">
-                                            <div className="row justify-space-between py-2">
-                                                <div className="col-lg-3">
-                                                    <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/129619988-1a959834-313c-443c-84c2-4fc2db8ef8f6.jpg" width="200" height="200" alt="profile" />
+                                                    <img src= "https://user-images.githubusercontent.com/63901494/149170047-04af8468-1dde-4bb8-8079-508cd1d7eae2.png" width="200" height="200" alt="profile" />
                                                     <p></p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <p className="lead text-dark pt-1 mb-0">판다</p>
-                                                    <p>(15기 김태희)<br></br>각자 한 마디 소감 블라블라</p>
+                                                    <p>(15기 김태희)<br></br>"악기 연주를 넘어 컴퓨터로 음악 생성하기🎵"</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,12 +243,12 @@ class HomeDetail extends React.Component{
                                             <div className="row justify-space-between py-2">
                                                 <div className="col-lg-3">
                                                     <p></p>
-                                                    <img src= "https://user-images.githubusercontent.com/63901494/129619988-1a959834-313c-443c-84c2-4fc2db8ef8f6.jpg" width="200" height="200" alt="profile" />
+                                                    <img src= "https://user-images.githubusercontent.com/63901494/149357764-277ed309-6ae1-4447-8272-9f09fce5122c.jpg" width="200" height="200" alt="profile" />
                                                     <p></p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <p className="lead text-dark pt-1 mb-0">푸</p>
-                                                    <p>(15기 권오현)<br></br>각자 한 마디 소감 블라블라</p>
+                                                    <p>(15기 권오현)<br></br>"음악만이 나라에서 허락하는 유일한 마약.."</p>
                                                 </div>
                                             </div>
                                         </div>
