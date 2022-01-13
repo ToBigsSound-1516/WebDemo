@@ -23,7 +23,7 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
                     ...props.style,
                     height: '6px',
                     width: '100%',
-                    backgroundColor: '#D1F2EB'
+                    backgroundColor: '#858384'
                 }}
                 >
                 {children}
@@ -36,32 +36,22 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
                     ...props.style,
                     height: '42px',
                     width: '42px',
-                    backgroundColor: '#1C2833',
-                    border: '3px solid',
-                    borderColor: '#D1F2EB'
+                    backgroundColor: '#88305C',
+
                 }}
                 >
-                    <div
-                    style={{
-                    position: 'absolute',
-                    top: '-35px',
-                    color: '#fff',
-                    fontWeight: 'bold', 
-                    fontSize: '14px',
-                    fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
-                    padding: '7px 4px 4px 4px',
-                    borderRadius: '4px',
-                    backgroundColor: '#548BF4'
-                    }}
-                >
-                    {trackValue[0].toFixed(1)}
-                </div>
                 </div>
             )}
             />
         )
         };   
         
+    var timeMsg = () => {
+        var sec = parseInt(songList[songIdx].duration/songList[songIdx].end * trackValue[0]);
+        var padSec = (sec%60).toString().padStart(2, 0) 
+        return (`${parseInt(sec/60)} : ${padSec}`);
+    };
+
     return (
         <div className="container">
             <Row className="marginTop5 justify-content-center">
@@ -74,8 +64,13 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
                         </Form.Select>
                     </Col>
                 </Row>
+
                 <Row className="marginTop5">
                     <Col><div className={trackArt} id="Track1"></div></Col>
+                </Row>
+
+                <Row className="marginTop5">
+                    <Col><p className='mashupTime'>{timeMsg()}</p></Col>
                 </Row>
 
                 <Row className="marginTop5" >

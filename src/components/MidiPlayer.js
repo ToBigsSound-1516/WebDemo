@@ -33,53 +33,60 @@ const Midiplayer = () => {
         'file': "IJustWanttoSayILoveYou.mid",
         'path': "midiFiles/IJustWanttoSayILoveYou.mid",
         'name': "I Just Want to Say I Love You",
-        'end': 1965
+        'end': 1965,
+        'duration': 253
       },
       {
         'id': 1,
         'file': "IsntSheLovely.mid",
         'path': "midiFiles/IsntSheLovely.mid",
         'name': "Isn't She Lovely",
-        'end': 733
+        'end': 733,
+        'duration': 92
       },
       {
         'id': 2,
         'file': "DontLookBackinAnger.mid",
         'path': "midiFiles/DontLookBackinAnger.mid",
         'name': "Don't Look Back in Anger",
-        'end': 1556
+        'end': 1556,
+        'duration': 525
       },
       {
         'id': 3,
         'file': "BilleJeans.mid",
         'path': "midiFiles/BilleJeans.mid",
         'name': "Bille Jeans",
-        'end': 2256
+        'end': 2256,
+        'duration': 521
       },
       {
         'id': 4,
         'file': "ThinkOutLoud.mid",
         'path': "midiFiles/ThinkOutLoud.mid",
         'name': "Think Out Loud",
-        'end': 1445
+        'end': 1445,
+        'duration': 182
       },
       {
         'id': 5,
         'file': "IBelieveICanFly.mid",
         'path': "midiFiles/IBelieveICanFly.mid",
         'name': "I Believe I Can Fly",
-        'end': 1280
+        'end': 1280,
+        'duration': 319
       },
       {
         'id': 6,
-        'name': "nobody knows you when youre down and out",
+        'name': "Nobody knows you when you're down and out",
         'path': "midiFiles/Jazz01.mid",
         'file': "Jazz01.mid",
-        'end': 1405
+        'end': 1405,
+        'duration': 222
       },
     ]); 
 
-    // 초기에 로드될 때 믹싱 파일을 불러오고 세팅합니다.
+    // 미디파일 인퍼런스를 실시할 때마다 새로운 미디파일을 받아와서 저장합니다.
     var handleSubmit = () => {
       console.log("Call handleSubmit");
       setMidFile(`https://smootify.o-r.kr:1516/dj?midi1=${songList[aSong].file}&midi2=${songList[bSong].file}&start1=${aValues[0]}&start2=${bValues[0]}&username=abc`);
@@ -94,6 +101,7 @@ const Midiplayer = () => {
         n_rank: 1,
       };
 
+      // 매시업 포인트를 받아와서 설정하는 역할
       axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
         console.log("mashup point request success");
         console.log(response.data[0]);
@@ -142,7 +150,11 @@ const Midiplayer = () => {
         <div className="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
             <div className="container">
             <div className="section text-center">
-                <Row className="marginTop3 justify-content-center">
+                <Row className="marginTop3">
+                    <p className="timeDescription">Mashup Time은 추천 시간으로 초기 설정됩니다.</p>
+                </Row>
+
+                <Row className="justify-content-center">
                   <Col md={6}>
                     <Form.Select size="lg" value={mixSong} onChange={(e) => {setMixSong(e.target.value)}}>
                       <option value={"Combination 1"}>Don't Look Back In Anger + Isn't She Lovely</option>
