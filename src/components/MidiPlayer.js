@@ -156,11 +156,29 @@ const Midiplayer = () => {
 
     // 초기 렌더링 시 값 설정
     useEffect(() => {
-      setSongAEnd(songList[1].end);
-      setSongBEnd(songList[0].end);
-      setAValues([500]);
-      setBValues([200]);
-      setMidFile("/dj");
+      setSongAEnd(songList[aSong].end);
+      setSongBEnd(songList[bSong].end);
+      
+      // 변화된 노래끼리의 최적 매시업 포인트 불러오기
+      var data = {
+        midi1: songList[aSong].file,
+        midi2: songList[bSong].file,
+        mode: 'distribution',
+        n_rank: 1,
+      };
+
+      // 매시업 포인트를 받아와서 설정하는 역할
+      axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
+        console.log("mashup point request success");
+        console.log(response.data[0]);
+        setAValues([response.data[0].start1]);
+        setBValues([response.data[0].start2]);
+      })
+      .catch((error) => {
+        console.log("Error on getting mashup point!")
+        console.log(error);
+      })
+
       setIsInference(false);
     }, []);
 
