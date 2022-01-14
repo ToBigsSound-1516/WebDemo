@@ -54,7 +54,7 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
 
     return (
         <div className="container">
-            <Row className="marginTop5 justify-content-center">
+            <Row className="justify-content-center">
                 <Row>
                     <Col className="justify-content-center">
                         <Form.Select value={songIdx} onChange={(e) => {changeSong(e.target.value, trackIdx)}}>
