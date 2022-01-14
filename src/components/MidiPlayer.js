@@ -15,11 +15,11 @@ const Midiplayer = () => {
     const [aValues, setAValues] = useState([50]); // 왼쪽 곡 마디 틱 (Range에서 사용)
     const [bValues, setBValues] = useState([50]); // 오른쪽 곡 마디 틱 (Range에서 사용)
 
-    const [aSong, setASong] = useState(1); // 왼쪽 곡 종류 (Select에서 사용)
-    const [bSong, setBSong] = useState(0); // 오른쪽 곡 종류 (Select에서 사용)
+    const [aSong, setASong] = useState(3); // 왼쪽 곡 종류 (Select에서 사용)
+    const [bSong, setBSong] = useState(1); // 오른쪽 곡 종류 (Select에서 사용)
     const [mixSong, setMixSong] = useState("Combination 1"); // 조합 곡 종류 (Select에서 사용)
-    const [aArt, setAArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
-    const [bArt, setBArt] = useState("Track Album0"); // 왼쪽 곡에 적용될 앨범아트
+    const [aArt, setAArt] = useState("Track Album3"); // 왼쪽 곡에 적용될 앨범아트
+    const [bArt, setBArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
     const [midFile, setMidFile] = useState("");
 
     const [songAEnd, setSongAEnd] = useState(100);
@@ -50,7 +50,7 @@ const Midiplayer = () => {
         'path': "midiFiles/DontLookBackinAnger.mid",
         'name': "Don't Look Back in Anger",
         'end': 1556,
-        'duration': 525
+        'duration': 285
       },
       {
         'id': 3,
@@ -58,7 +58,7 @@ const Midiplayer = () => {
         'path': "midiFiles/BilleJeans.mid",
         'name': "Bille Jeans",
         'end': 2256,
-        'duration': 521
+        'duration': 281
       },
       {
         'id': 4,
@@ -135,6 +135,24 @@ const Midiplayer = () => {
       setIsInference(true); // JSX 버튼을 비활성화
 
     };
+    
+    var handleChangeMixSong = (value) => {
+      if(value === "Combination 1") {
+        handleChangeSong(3, 1);
+        handleChangeSong(1, 2);
+        setMixSong("Combination 1");
+      }
+      else if (value === "Combination 2"){
+        handleChangeSong(5, 1);
+        handleChangeSong(2, 2);
+        setMixSong("Combination 2");
+      }
+      else if (value === "Combination 3") {
+        handleChangeSong(4, 1);
+        handleChangeSong(2, 2);
+        setMixSong("Combination 3");
+      }
+    };
 
     // 초기 렌더링 시 값 설정
     useEffect(() => {
@@ -150,18 +168,23 @@ const Midiplayer = () => {
         <div className="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
             <div className="container">
             <div className="section text-center">
+                
                 <Row className="marginTop3">
-                    {isInference ? <p></p> : <p className="timeDescription">Mashup Time은 추천 시간으로 초기 설정됩니다.</p> }
+                    <p className="songTitle">Smootify's Pick</p>
                 </Row>
 
                 <Row className="justify-content-center">
                   <Col md={6}>
-                    <Form.Select size="lg" value={mixSong} onChange={(e) => {setMixSong(e.target.value)}}>
-                      <option value={"Combination 1"}>Don't Look Back In Anger + Isn't She Lovely</option>
-                      <option value={"Combination 2"}>샘플 곡 조합2</option>
-                      <option value={"Combination 3"}>샘플 곡 조합3</option>
+                    <Form.Select size="lg" value={mixSong} onChange={(e) => {handleChangeMixSong(e.target.value)}}>
+                      <option value={"Combination 1"}>Bille Jeans + Isn't She Lovely</option>
+                      <option value={"Combination 2"}>Think Out Loud + Don't Look Back in Ange</option>
+                      <option value={"Combination 3"}>I Believe I Can Fly + Don't Look Back in Anger</option>
                     </Form.Select>
                   </Col>
+                </Row>
+                
+                <Row className="marginTop3">
+                    {isInference ? <p></p> : <p className="timeDescription">Mashup Time은 추천 시간으로 초기 설정됩니다.</p> }
                 </Row>
                 
                 <Row>

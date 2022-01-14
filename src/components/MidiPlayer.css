@@ -77,6 +77,13 @@
     font-weight: bold;
 }
 
+.songTitle {
+    font-family: 'establishRetrosansOTF';
+    font-size: 40px;
+    font-weight: bold;
+    color: #AD0257;
+}
+
 .mashupBoard {
     border: 4px solid;
     border-color: #858384;
