@@ -93,25 +93,6 @@ const Midiplayer = () => {
     };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
-      // 변화된 노래끼리의 최적 매시업 포인트 불러오기
-      var data = {
-        midi1: songList[aSong].file,
-        midi2: songList[bSong].file,
-        mode: 'distribution',
-        n_rank: 1,
-      };
-
-      // 매시업 포인트를 받아와서 설정하는 역할
-      axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
-        console.log("mashup point request success");
-        console.log(response.data[0]);
-        setAValues([response.data[0].start1]);
-        setBValues([response.data[0].start2]);
-      })
-      .catch((error) => {
-        console.log("Error on getting mashup point!")
-        console.log(error);
-      })
       setIsInference(false); // 인퍼런스 모드를 다시 수동으로 
 
       // 해당 트랙의 앨범 아트 및 목록, 레인지 끝지점 변경
@@ -138,31 +119,92 @@ const Midiplayer = () => {
     
     var handleChangeMixSong = (value) => {
       if(value === "Combination 1") {
-        handleChangeSong(3, 1);
-        handleChangeSong(1, 2);
         setMixSong("Combination 1");
+
+        setASong(songList[3].id);
+        setAArt(`Track Album${3}`);
+        setSongAEnd(songList[3].end);
+        setBSong(songList[1].id);
+        setBArt(`Track Album${1}`);
+        setSongBEnd(songList[1].end);
+
       }
       else if (value === "Combination 2"){
-        handleChangeSong(5, 1);
-        handleChangeSong(2, 2);
         setMixSong("Combination 2");
+
+        setASong(songList[4].id);
+        setAArt(`Track Album${4}`);
+        setSongAEnd(songList[4].end);
+        setBSong(songList[2].id);
+        setBArt(`Track Album${2}`);
+        setSongBEnd(songList[2].end);
       }
       else if (value === "Combination 3") {
-        handleChangeSong(4, 1);
-        handleChangeSong(2, 2);
         setMixSong("Combination 3");
+
+        setASong(songList[5].id);
+        setAArt(`Track Album${5}`);
+        setSongAEnd(songList[5].end);
+        setBSong(songList[2].id);
+        setBArt(`Track Album${2}`);
+        setSongBEnd(songList[2].end);
       }
     };
 
     // 초기 렌더링 시 값 설정
     useEffect(() => {
-      setSongAEnd(songList[1].end);
-      setSongBEnd(songList[0].end);
-      setAValues([500]);
-      setBValues([200]);
-      setMidFile("/dj");
+      setSongAEnd(songList[aSong].end);
+      setSongBEnd(songList[bSong].end);
+
+      // 변화된 노래끼리의 최적 매시업 포인트 불러오기
+      var data = {
+        midi1: songList[aSong].file,
+        midi2: songList[bSong].file,
+        mode: 'distribution',
+        n_rank: 1,
+      };
+
+      // 매시업 포인트를 받아와서 설정하는 역할
+      axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
+        console.log("mashup point request success");
+        console.log(response.data[0]);
+        setAValues([response.data[0].start1]);
+        setBValues([response.data[0].start2]);
+      })
+      .catch((error) => {
+        console.log("Error on getting mashup point!")
+        console.log(error);
+      })
+
       setIsInference(false);
     }, []);
+
+
+    useEffect(() => {
+      // 변화된 노래끼리의 최적 매시업 포인트 불러오기
+      var data = {
+        midi1: songList[aSong].file,
+        midi2: songList[bSong].file,
+        mode: 'distribution',
+        n_rank: 1,
+      };
+
+      console.log(data);
+
+
+      // 매시업 포인트를 받아와서 설정하는 역할
+      axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
+        console.log("mashup point request success");
+        console.log(response.data[0]);
+        setAValues([response.data[0].start1]);
+        setBValues([response.data[0].start2]);
+      })
+      .catch((error) => {
+        console.log("Error on getting mashup point!")
+        console.log(error);
+      })
+      setIsInference(false);
+    }, [aSong, bSong]);
 
     return (
         <div className="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
@@ -177,7 +219,7 @@ const Midiplayer = () => {
                   <Col md={6}>
                     <Form.Select size="lg" value={mixSong} onChange={(e) => {handleChangeMixSong(e.target.value)}}>
                       <option value={"Combination 1"}>Bille Jeans + Isn't She Lovely</option>
-                      <option value={"Combination 2"}>Think Out Loud + Don't Look Back in Ange</option>
+                      <option value={"Combination 2"}>Think Out Loud + Don't Look Back in Anger</option>
                       <option value={"Combination 3"}>I Believe I Can Fly + Don't Look Back in Anger</option>
                     </Form.Select>
                   </Col>
