@@ -155,7 +155,6 @@ const Midiplayer = () => {
     useEffect(() => {
       setSongAEnd(songList[aSong].end);
       setSongBEnd(songList[bSong].end);
-
       // 변화된 노래끼리의 최적 매시업 포인트 불러오기
       var data = {
         midi1: songList[aSong].file,
