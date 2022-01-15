@@ -151,6 +151,13 @@ const Midiplayer = () => {
         handleChangeSong(4, 1);
         handleChangeSong(2, 2);
         setMixSong("Combination 3");
+
+        setASong(songList[5].id);
+        setAArt(`/Albums/Album${5}.jpg`);
+        setSongAEnd(songList[5].end);
+        setBSong(songList[2].id);
+        setBArt(`/Albums/Album$;{2}.jpg`);
+        setSongBEnd(songList[2].end);
       }
     };
 
@@ -158,7 +165,6 @@ const Midiplayer = () => {
     useEffect(() => {
       setSongAEnd(songList[aSong].end);
       setSongBEnd(songList[bSong].end);
-      
       // 변화된 노래끼리의 최적 매시업 포인트 불러오기
       var data = {
         midi1: songList[aSong].file,
