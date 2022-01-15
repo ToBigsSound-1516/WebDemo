@@ -66,7 +66,7 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
                 </Row>
 
                 <Row className="marginTop5">
-                    <Col><div className={trackArt} id={trackIdx}></div></Col>
+                    <Col><img className="Track" src={trackArt} id={trackIdx}></img></Col>
                 </Row>
 
                 <Row className="marginTop5">

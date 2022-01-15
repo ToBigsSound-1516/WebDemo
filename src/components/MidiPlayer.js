@@ -18,8 +18,8 @@ const Midiplayer = () => {
     const [aSong, setASong] = useState(3); // 왼쪽 곡 종류 (Select에서 사용)
     const [bSong, setBSong] = useState(1); // 오른쪽 곡 종류 (Select에서 사용)
     const [mixSong, setMixSong] = useState("Combination 1"); // 조합 곡 종류 (Select에서 사용)
-    const [aArt, setAArt] = useState("Track Album3"); // 왼쪽 곡에 적용될 앨범아트
-    const [bArt, setBArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
+    const [aArt, setAArt] = useState("/Albums/Album3.jpg"); // 왼쪽 곡에 적용될 앨범아트
+    const [bArt, setBArt] = useState("/Albums/Album1.jpg"); // 왼쪽 곡에 적용될 앨범아트
     const [midFile, setMidFile] = useState("");
 
     const [songAEnd, setSongAEnd] = useState(100);
@@ -98,12 +98,12 @@ const Midiplayer = () => {
       // 해당 트랙의 앨범 아트 및 목록, 레인지 끝지점 변경
       if (trackNumber === 1) {
         setASong(songList[value].id);
-        setAArt(`Track Album${value}`);
+        setAArt(`/Albums/Album${value}.jpg`);
         setSongAEnd(songList[value].end);
       }
       else{
         setBSong(songList[value].id);
-        setBArt(`Track Album${value}`);
+        setBArt(`/Albums/Album${value}.jpg`);
         setSongBEnd(songList[value].end);
       };
 
@@ -122,10 +122,10 @@ const Midiplayer = () => {
         setMixSong("Combination 1");
 
         setASong(songList[3].id);
-        setAArt(`Track Album${3}`);
+        setAArt(`/Albums/Album${3}.jpg`);
         setSongAEnd(songList[3].end);
         setBSong(songList[1].id);
-        setBArt(`Track Album${1}`);
+        setBArt(`/Albums/Album${1}.jpg`);
         setSongBEnd(songList[1].end);
 
       }
@@ -133,20 +133,20 @@ const Midiplayer = () => {
         setMixSong("Combination 2");
 
         setASong(songList[4].id);
-        setAArt(`Track Album${4}`);
+        setAArt(`/Albums/Album${4}.jpg`);
         setSongAEnd(songList[4].end);
         setBSong(songList[2].id);
-        setBArt(`Track Album${2}`);
+        setBArt(`/Albums/Album${2}.jpg`);
         setSongBEnd(songList[2].end);
       }
       else if (value === "Combination 3") {
         setMixSong("Combination 3");
 
         setASong(songList[5].id);
-        setAArt(`Track Album${5}`);
+        setAArt(`/Albums/Album${5}.jpg`);
         setSongAEnd(songList[5].end);
         setBSong(songList[2].id);
-        setBArt(`Track Album${2}`);
+        setBArt(`/Albums/Album${2}.jpg`);
         setSongBEnd(songList[2].end);
       }
     };
