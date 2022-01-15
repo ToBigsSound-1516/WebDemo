@@ -70,7 +70,7 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
                 </Row>
 
                 <Row className="marginTop5">
-                    <Col><p className='mashupTime'>{timeMsg()}</p></Col>
+                    <Col md={12}><p className='mashupTime'>{timeMsg()}</p></Col>
                 </Row>
 
                 <Row className="marginTop5" >
@@ -80,7 +80,7 @@ const Miditrack = ({trackIdx, trackArt, songIdx, songEnd, trackValue, setTrackVa
                 </Row>
                 
                 <Row className="marginTop5" >
-                    <Col className="midiplayer"><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" src={songList[songIdx].path}></midi-player></Col>
+                    <Col md={12}><midi-player sound-font="https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus" src={songList[songIdx].path}></midi-player></Col>
                 </Row>
 
             </Row>
