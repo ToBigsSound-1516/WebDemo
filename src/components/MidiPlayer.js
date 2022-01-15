@@ -18,8 +18,8 @@ const Midiplayer = () => {
     const [aSong, setASong] = useState(3); // 왼쪽 곡 종류 (Select에서 사용)
     const [bSong, setBSong] = useState(1); // 오른쪽 곡 종류 (Select에서 사용)
     const [mixSong, setMixSong] = useState("Combination 1"); // 조합 곡 종류 (Select에서 사용)
-    const [aArt, setAArt] = useState("Track Album3"); // 왼쪽 곡에 적용될 앨범아트
-    const [bArt, setBArt] = useState("Track Album1"); // 왼쪽 곡에 적용될 앨범아트
+    const [aArt, setAArt] = useState("/Albums/Album3.jpg"); // 왼쪽 곡에 적용될 앨범아트
+    const [bArt, setBArt] = useState("/Albums/Album1.jpg"); // 왼쪽 곡에 적용될 앨범아트
     const [midFile, setMidFile] = useState("");
 
     const [songAEnd, setSongAEnd] = useState(100);
@@ -93,36 +93,17 @@ const Midiplayer = () => {
     };
 
     var handleChangeSong = (value, trackNumber) => { // 트랙의 번호를 입력받아서 해당 트랙의 앨범과 폼 표시 내용까지 모두 바꿉니다.
-      // 변화된 노래끼리의 최적 매시업 포인트 불러오기
-      var data = {
-        midi1: songList[aSong].file,
-        midi2: songList[bSong].file,
-        mode: 'distribution',
-        n_rank: 1,
-      };
-
-      // 매시업 포인트를 받아와서 설정하는 역할
-      axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
-        console.log("mashup point request success");
-        console.log(response.data[0]);
-        setAValues([response.data[0].start1]);
-        setBValues([response.data[0].start2]);
-      })
-      .catch((error) => {
-        console.log("Error on getting mashup point!")
-        console.log(error);
-      })
       setIsInference(false); // 인퍼런스 모드를 다시 수동으로 
 
       // 해당 트랙의 앨범 아트 및 목록, 레인지 끝지점 변경
       if (trackNumber === 1) {
         setASong(songList[value].id);
-        setAArt(`Track Album${value}`);
+        setAArt(`/Albums/Album${value}.jpg`);
         setSongAEnd(songList[value].end);
       }
       else{
         setBSong(songList[value].id);
-        setBArt(`Track Album${value}`);
+        setBArt(`/Albums/Album${value}.jpg`);
         setSongBEnd(songList[value].end);
       };
 
@@ -138,25 +119,34 @@ const Midiplayer = () => {
     
     var handleChangeMixSong = (value) => {
       if(value === "Combination 1") {
-        handleChangeSong(3, 1);
-        handleChangeSong(1, 2);
         setMixSong("Combination 1");
+
+        setASong(songList[3].id);
+        setAArt(`/Albums/Album${3}.jpg`);
+        setSongAEnd(songList[3].end);
+        setBSong(songList[1].id);
+        setBArt(`/Albums/Album${1}.jpg`);
+        setSongBEnd(songList[1].end);
+
       }
       else if (value === "Combination 2"){
-        handleChangeSong(5, 1);
-        handleChangeSong(2, 2);
         setMixSong("Combination 2");
+
+        setASong(songList[4].id);
+        setAArt(`/Albums/Album${4}.jpg`);
+        setSongAEnd(songList[4].end);
+        setBSong(songList[2].id);
+        setBArt(`/Albums/Album${2}.jpg`);
+        setSongBEnd(songList[2].end);
       }
       else if (value === "Combination 3") {
-        handleChangeSong(4, 1);
-        handleChangeSong(2, 2);
         setMixSong("Combination 3");
 
         setASong(songList[5].id);
         setAArt(`/Albums/Album${5}.jpg`);
         setSongAEnd(songList[5].end);
         setBSong(songList[2].id);
-        setBArt(`/Albums/Album$;{2}.jpg`);
+        setBArt(`/Albums/Album${2}.jpg`);
         setSongBEnd(songList[2].end);
       }
     };
@@ -188,6 +178,33 @@ const Midiplayer = () => {
       setIsInference(false);
     }, []);
 
+
+    useEffect(() => {
+      // 변화된 노래끼리의 최적 매시업 포인트 불러오기
+      var data = {
+        midi1: songList[aSong].file,
+        midi2: songList[bSong].file,
+        mode: 'distribution',
+        n_rank: 1,
+      };
+
+      console.log(data);
+
+
+      // 매시업 포인트를 받아와서 설정하는 역할
+      axios.post("https://smootify.o-r.kr:1516/mashup", data).then((response)=>{
+        console.log("mashup point request success");
+        console.log(response.data[0]);
+        setAValues([response.data[0].start1]);
+        setBValues([response.data[0].start2]);
+      })
+      .catch((error) => {
+        console.log("Error on getting mashup point!")
+        console.log(error);
+      })
+      setIsInference(false);
+    }, [aSong, bSong]);
+
     return (
         <div className="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
             <div className="container">
@@ -201,7 +218,7 @@ const Midiplayer = () => {
                   <Col md={6}>
                     <Form.Select size="lg" value={mixSong} onChange={(e) => {handleChangeMixSong(e.target.value)}}>
                       <option value={"Combination 1"}>Bille Jeans + Isn't She Lovely</option>
-                      <option value={"Combination 2"}>Think Out Loud + Don't Look Back in Ange</option>
+                      <option value={"Combination 2"}>Think Out Loud + Don't Look Back in Anger</option>
                       <option value={"Combination 3"}>I Believe I Can Fly + Don't Look Back in Anger</option>
                     </Form.Select>
                   </Col>

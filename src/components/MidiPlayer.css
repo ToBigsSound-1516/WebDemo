@@ -4,33 +4,8 @@
     margin:auto;
     border: 4px solid;
     border-color: #858384;
-    background-size: 100% 100%;
-}
-
-.Album0 {
-    background-image: url('images/Albums/Album0.jpg');
-}
-
-
-.Album1 {
-    background-image: url('images/Albums/Album1.jpg');
-}
-
-.Album2 {
-    background-image: url('images/Albums/Album2.jpg');
-}
-
-.Album3 {
-    background-image: url('images/Albums/Album3.jpg');
-}
-.Album4 {
-    background-image: url('images/Albums/Album4.jpg');
-}
-.Album5 {
-    background-image: url('images/Albums/Album5.jpg');
-}
-.Album6 {
-    background-image: url('images/Albums/Album6.jpg');
+    max-width:100%;
+    max-height:100%;
 }
 
 .background{
@@ -86,4 +61,8 @@
 .mashupBoard {
     border: 4px solid;
     border-color: #858384;
+}
+
+.midiplayer {
+    overflow: scroll;
 }
