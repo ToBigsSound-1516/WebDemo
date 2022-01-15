@@ -64,7 +64,7 @@ const Midiplayer = () => {
         'id': 4,
         'file': "ThinkOutLoud.mid",
         'path': "midiFiles/ThinkOutLoud.mid",
-        'name': "Think Out Loud",
+        'name': "Thinking Out Loud",
         'end': 1445,
         'duration': 182
       },
